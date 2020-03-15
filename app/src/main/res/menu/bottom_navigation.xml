@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/home"
+    android:icon="@drawable/ic_home_black_24dp"
+    android:title="@string/home"
+    />
+    <item
+        android:id="@+id/buses"
+        android:icon="@drawable/ic_directions_bus_black_24dp"
+        android:title="@string/bus"/>
+    <item
+        android:id="@+id/offers"
+        android:icon="@drawable/ic_local_offer_black_24dp"
+        android:title="@string/offer"
+        />
+    <item android:title="@string/profile"
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_insert_emoticon_black_24dp"/>
+
+</menu>
