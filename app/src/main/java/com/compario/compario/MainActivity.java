@@ -1,8 +1,8 @@
 package com.compario.compario;
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id=item.getItemId();
-                FragmentManager fragmentManager=getFragmentManager();
+                FragmentManager fragmentManager=getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 
                 switch (id)
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
 
         });
 
-        FragmentManager fragmentManager=getFragmentManager();
+        FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frag_main,new HomeFragment(MainActivity.this));
         fragmentTransaction.commit();
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
 
     @Override
     public void onSearchClick(SearchDataModel searchDataModel) {
-        FragmentManager fragmentManager=getFragmentManager();
+        FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frag_main,new BlankFragment(MainActivity.this,searchDataModel));
         fragmentTransaction.commit();

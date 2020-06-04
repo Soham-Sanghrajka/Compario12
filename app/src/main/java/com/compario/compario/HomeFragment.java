@@ -1,14 +1,18 @@
 package com.compario.compario;
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
+import android.app.DatePickerDialog;
+import android.support.v4.app.Fragment;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import org.json.JSONObject;
 import java.io.BufferedReader;
@@ -23,13 +27,13 @@ import java.util.Iterator;
  */
 
 @SuppressLint("ValidFragment")
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements DatePickerDialog.OnDateSetListener{
 
     AutoCompleteTextView from;
     AutoCompleteTextView to;
-    Date date;
+    EditText dateOfJrn;
     ImageButton search;
-    ImageButton datePicker;
+    ImageButton dateP;
     private FragmentCallback fragmentCallback;
 
     @SuppressLint("ValidFragment")
@@ -46,7 +50,8 @@ public class HomeFragment extends Fragment {
         from=view.findViewById(R.id.fromA);
         to=view.findViewById(R.id.toB);
         search=view.findViewById(R.id.searchbtn);
-        datePicker=view.findViewById(R.id.datebtn);
+        dateP=view.findViewById(R.id.datebtn);
+        dateOfJrn=view.findViewById(R.id.dateInput);
         String json = null;
         String data = "";
         AssetManager assetManager = getActivity().getAssets();
@@ -78,6 +83,14 @@ public class HomeFragment extends Fragment {
             from.setAdapter(arrayAdapter);
             to.setThreshold(2);
             to.setAdapter(arrayAdapter);
+            dateP.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DialogFragment newFragment = new DatePickerFragment();
+                    newFragment.setTargetFragment(HomeFragment.this,0);
+                    newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+                }
+            });
             search.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -99,5 +112,12 @@ public class HomeFragment extends Fragment {
             e.printStackTrace();
         }
         return view;
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        StringBuilder sb = new StringBuilder().append(year).append("-").append(month + 1).append("-").append(dayOfMonth);
+        String formattedDate = sb.toString();
+        dateOfJrn.setText(formattedDate);
     }
 }
